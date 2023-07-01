@@ -42,8 +42,8 @@ const updateUserModule = async (userId, data) => {
 };
 
 const updateProfile = asyncHandler(async (req, res) => {
-  const { name, about } = req.body;
-  const user = await updateUserModule(req.user._id, { name, about });
+  const { name, email } = req.body;
+  const user = await updateUserModule(req.user._id, { name, email });
   res.send(user);
 });
 
