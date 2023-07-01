@@ -8,7 +8,7 @@ module.exports = {
       user: 'maria',
       host: ['62.84.123.152'],
       ref: 'origin/level-1',
-      repo: 'git@github.com:marusillda/movies-explorer-api.git',
+      repo: 'https://github.com/marusillda/movies-explorer-api.git',
       path: '~/movies/backend',
       'post-deploy': 'npm install',
     },
