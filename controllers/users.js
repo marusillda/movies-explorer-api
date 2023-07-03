@@ -1,11 +1,15 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const createError = require('http-errors');
 const {
   HTTP_STATUS_NOT_FOUND,
   HTTP_STATUS_CREATED,
   HTTP_STATUS_UNAUTHORIZED,
 } = require('node:http2').constants;
-const createError = require('http-errors');
+const {
+  USER_NOT_FOUND,
+  USER_NOT_AUTHORIZED,
+} = require('../errorMessages');
 const userModel = require('../models/user');
 const asyncHandler = require('../middlewares/asyncHandler');
 
@@ -22,11 +26,11 @@ const loginUser = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
   const user = await userModel.findOne({ email }).select('+password');
   if (!user) {
-    return next(createError(HTTP_STATUS_UNAUTHORIZED, 'Пользователь не авторизован'));
+    return next(createError(HTTP_STATUS_UNAUTHORIZED, USER_NOT_AUTHORIZED));
   }
   const compareResult = await bcrypt.compare(password, user.password);
   if (!compareResult) {
-    return next(createError(HTTP_STATUS_UNAUTHORIZED, 'Пользователь не авторизован'));
+    return next(createError(HTTP_STATUS_UNAUTHORIZED, USER_NOT_AUTHORIZED));
   }
   const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
   return res.send({ token });
@@ -50,7 +54,7 @@ const updateProfile = asyncHandler(async (req, res) => {
 const getProfile = asyncHandler(async (req, res, next) => {
   const user = await userModel
     .findById(req.user._id)
-    .orFail(() => next(createError(HTTP_STATUS_NOT_FOUND, 'Пользователь не найден')));
+    .orFail(() => next(createError(HTTP_STATUS_NOT_FOUND, USER_NOT_FOUND)));
   res.send(user);
 });
 

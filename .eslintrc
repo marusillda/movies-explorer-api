@@ -8,6 +8,17 @@
           "_id"
         ]
       }
-    ]
+    ],
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": [
+          "ret",
+          "req"
+        ]
+      }
+    ],
+    "no-console": "off"
   }
 }

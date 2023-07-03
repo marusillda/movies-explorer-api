@@ -1,7 +1,9 @@
 
 # ССЫЛКА НА GITHUB РЕПОЗИТОРИЙ
-https://github.com/marusillda/express-mesto-gha
+https://github.com/marusillda/movies-explorer-api
 
+# АДРЕС ДОМЕНА
+https://api.movies.marusillda.nomoreparties.sbs
 
 ## Директории
 
@@ -15,3 +17,4 @@ https://github.com/marusillda/express-mesto-gha
 
 `npm run start` — запускает сервер   
 `npm run dev` — запускает сервер с hot-reload
+`npm run deploy` — запускает deploy в production при наличии ssh ключа

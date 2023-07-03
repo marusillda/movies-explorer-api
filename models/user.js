@@ -20,7 +20,6 @@ const userSchema = new mongoose.Schema({
 }, {
   toJSON: {
     transform: (doc, ret) => {
-      // eslint-disable-next-line no-param-reassign
       delete ret.password;
     },
   },

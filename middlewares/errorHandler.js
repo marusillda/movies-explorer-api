@@ -4,6 +4,9 @@ const {
   HTTP_STATUS_CONFLICT,
 } = require('node:http2').constants;
 const mongoose = require('mongoose');
+const {
+  SERVER_ERROR,
+} = require('../errorMessages');
 
 const errorHandler = (err, req, res, next) => {
   if (res.headersSent) {
@@ -28,7 +31,7 @@ const errorHandler = (err, req, res, next) => {
   }
 
   return res.status(err.status).json({
-    message: err.status === HTTP_STATUS_INTERNAL_SERVER_ERROR ? 'На сервере произошла ошибка' : err.message,
+    message: err.status === HTTP_STATUS_INTERNAL_SERVER_ERROR ? SERVER_ERROR : err.message,
   });
 };
 

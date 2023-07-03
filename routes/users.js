@@ -6,4 +6,4 @@ router.get('/me', getProfile);
 
 router.patch('/me', validateProfileData, updateProfile);
 
-module.exports = router; // экспортировали роутер
+module.exports = router;
