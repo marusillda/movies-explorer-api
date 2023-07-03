@@ -8,7 +8,7 @@ const movieModel = require('../models/movie');
 const asyncHandler = require('../middlewares/asyncHandler');
 
 const getMovies = asyncHandler(async (req, res) => {
-  const movies = await movieModel.find({}).sort('-createdAt');
+  const movies = await movieModel.find({ owner: req.user._id }).sort('-createdAt');
   res.send(movies);
 });
 
