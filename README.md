@@ -3,7 +3,7 @@
 https://github.com/marusillda/movies-explorer-api
 
 # АДРЕС ДОМЕНА
-https://api.movies.marusillda.nomoreparties.sbs
+https://api.movies.marusillda.nomoreparties.sbs/
 
 ## Директории
 
