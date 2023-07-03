@@ -10,7 +10,7 @@ module.exports = {
       ref: 'origin/level-1',
       repo: 'https://github.com/marusillda/movies-explorer-api.git',
       path: '~/movies/backend',
-      'post-deploy': 'npm install',
+      'post-deploy': 'npm install && pm2 restart movies',
     },
   },
 };
