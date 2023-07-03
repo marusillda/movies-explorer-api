@@ -6,7 +6,7 @@ module.exports = {
   deploy: {
     production: {
       user: 'maria',
-      host: ['62.84.123.152'],
+      host: ['api.movies.marusillda.nomoreparties.sbs'],
       ref: 'origin/level-1',
       repo: 'https://github.com/marusillda/movies-explorer-api.git',
       path: '~/movies/backend',
