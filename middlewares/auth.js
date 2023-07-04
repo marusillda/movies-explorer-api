@@ -6,8 +6,7 @@ const {
 const {
   USER_NOT_AUTHORIZED,
 } = require('../errorMessages');
-
-const { JWT_SECRET = '421b5fa29e2f3344c4' } = process.env;
+const { JWT_SECRET } = require('../config');
 
 const auth = (req, res, next) => {
   if (!req.headers.authorization) {

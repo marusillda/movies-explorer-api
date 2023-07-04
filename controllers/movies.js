@@ -12,19 +12,19 @@ const movieModel = require('../models/movie');
 const asyncHandler = require('../middlewares/asyncHandler');
 
 const getMovies = asyncHandler(async (req, res) => {
-  const movies = await movieModel.find({ owner: req.user._id }).sort('-createdAt');
+  const movies = await movieModel.find({ owner: req.user._id });
   res.send(movies);
 });
 
 const deleteMovie = asyncHandler(async (req, res, next) => {
   const movie = await movieModel
     .findById(req.params.movieId)
-    .orFail(() => next(createError(HTTP_STATUS_NOT_FOUND, MOVIE_NOT_FOUND)));
+    .orFail(createError(HTTP_STATUS_NOT_FOUND, MOVIE_NOT_FOUND));
   if (movie.owner._id.toString() !== req.user._id) {
     return next(createError(HTTP_STATUS_FORBIDDEN, MOVIE_DELETE_PERMISSION_DENIED));
   }
   await movieModel.deleteOne(movie);
-  return res.send({});
+  return res.send({ message: 'Фильм удален', movie });
 });
 
 const createMovie = asyncHandler(async (req, res) => {

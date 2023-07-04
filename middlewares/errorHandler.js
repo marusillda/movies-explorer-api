@@ -30,8 +30,10 @@ const errorHandler = (err, req, res, next) => {
     });
   }
 
-  return res.status(err.status).json({
-    message: err.status === HTTP_STATUS_INTERNAL_SERVER_ERROR ? SERVER_ERROR : err.message,
+  const { status: errorStatus = HTTP_STATUS_INTERNAL_SERVER_ERROR } = err;
+
+  return res.status(errorStatus).json({
+    message: errorStatus === HTTP_STATUS_INTERNAL_SERVER_ERROR ? SERVER_ERROR : err.message,
   });
 };
 

@@ -12,8 +12,7 @@ const {
 } = require('../errorMessages');
 const userModel = require('../models/user');
 const asyncHandler = require('../middlewares/asyncHandler');
-
-const { JWT_SECRET = '421b5fa29e2f3344c4' } = process.env;
+const { JWT_SECRET } = require('../config');
 
 const createUser = asyncHandler(async (req, res) => {
   const pwdHash = await bcrypt.hash(req.body.password, 10);
@@ -51,10 +50,10 @@ const updateProfile = asyncHandler(async (req, res) => {
   res.send(user);
 });
 
-const getProfile = asyncHandler(async (req, res, next) => {
+const getProfile = asyncHandler(async (req, res) => {
   const user = await userModel
     .findById(req.user._id)
-    .orFail(() => next(createError(HTTP_STATUS_NOT_FOUND, USER_NOT_FOUND)));
+    .orFail(createError(HTTP_STATUS_NOT_FOUND, USER_NOT_FOUND));
   res.send(user);
 });
 
