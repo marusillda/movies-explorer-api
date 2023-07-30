@@ -14,11 +14,15 @@ const userModel = require('../models/user');
 const asyncHandler = require('../middlewares/asyncHandler');
 const { JWT_SECRET } = require('../config');
 
+const generateToken = (userId) => jwt.sign({ _id: userId }, JWT_SECRET, { expiresIn: '7d' });
+
 const createUser = asyncHandler(async (req, res) => {
   const pwdHash = await bcrypt.hash(req.body.password, 10);
   const userData = { ...req.body, password: pwdHash };
   const createdUser = await userModel.create(userData);
-  res.status(HTTP_STATUS_CREATED).send(createdUser);
+  const token = generateToken(createdUser._id);
+
+  return res.status(HTTP_STATUS_CREATED).send({ token });
 });
 
 const loginUser = asyncHandler(async (req, res, next) => {
@@ -31,7 +35,7 @@ const loginUser = asyncHandler(async (req, res, next) => {
   if (!compareResult) {
     return next(createError(HTTP_STATUS_UNAUTHORIZED, USER_NOT_AUTHORIZED));
   }
-  const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
+  const token = generateToken(user._id);
   return res.send({ token });
 });
 
