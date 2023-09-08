@@ -4,7 +4,7 @@
 
 Код проекта можно посмотреть по [ссылке](https://github.com/marusillda/movies-explorer-api).
 
-# АДРЕС ДОМЕНА
+**АДРЕС ДОМЕНА:**
 https://api.movies.marusillda.nomoreparties.sbs/
 
 **Выполнена реализация бэкенд части проекта, в которой предусмотрено:** 
