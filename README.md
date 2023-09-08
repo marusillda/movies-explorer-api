@@ -35,10 +35,10 @@ https://api.movies.marusillda.nomoreparties.sbs/
 - Установка и запуск nginx
 - SSL-сертификат
 
-## Запуск проекта
+**Запуск проекта**
 
 `npm run start` — запускает сервер   
 `npm run dev` — запускает сервер с hot-reload
 
-## Деплой проекта
+**Деплой проекта**
 `npm run deploy` — запускает deploy в production при наличии ssh ключа
